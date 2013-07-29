@@ -347,16 +347,14 @@ class Loader(object):
             'board_actions_since' : None # Replaced in run loop
         }
         if ARGS.all:
-            verbose('Loading all available actions')
             self.last_date = '1970-01-01T00:00:00Z'
+            verbose('Loading all available actions')
         else:
             self.last_date = self._load_date()
             verbose('Loading actions since %s' % (self.last_date,))
         first = True
         while first or (not ARGS.once):
             if not first:
-                if self.last_date is not None:
-                    self._save_date(self.last_date)
                 try:
                     sleep(ARGS.sleep)
                 except KeyboardInterrupt:
@@ -378,12 +376,13 @@ class Loader(object):
             func = self._from_files
         else:
             func = self._from_trello
-        for t in func():
-            yield t
+        for i in func():
+            yield i
 
     def saw_action(self, action):
         if not ARGS.file:
             self.last_date = action.date()
+            self._save_date(self.last_date)
 
 #
 # Run loop
