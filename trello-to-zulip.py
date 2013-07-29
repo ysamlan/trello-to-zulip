@@ -31,13 +31,24 @@ def shorten_subject(s):
         return s[:ZULIP_SUBJECT_MAX - 3] + '...'
     return s
 
-def verbose(s):
-    if ARGS.verbose:
-        print str(s)
-
 def stderr(s):
     sys.stderr.write(s)
     sys.stderr.write('\n')
+
+
+class Logger(object):
+    def _log(self, msg):
+        if ARGS.verbose:
+            print str(msg)
+
+    def trello_json(self, msg):
+        self._log(msg)
+
+    def zulip_msg(self, msg):
+        self._log(msg)
+
+    def start_date(self, msg):
+        self._log(msg)
 
 
 class Config(object):
@@ -106,7 +117,6 @@ class Action(object):
     def card_name(self):
         return self.data()['card']['name']
     def board_url(self):
-        #return '[%s](https://trello.com/board/%s)' % (board['name'], board['id'])
         board = self.data()['board']
         return 'https://trello.com/board/%s' % (board['id'],)
     def card_url(self):
@@ -309,7 +319,8 @@ class ActionPrinter(object):
 
 
 class Loader(object):
-    def __init__(self):
+    def __init__(self, logger):
+        self.logger = logger
         self.last_date = None
 
     def _load_date(self):
@@ -348,10 +359,10 @@ class Loader(object):
         }
         if ARGS.all:
             self.last_date = '1970-01-01T00:00:00Z'
-            verbose('Loading all available actions')
+            self.logger.start_date('Loading all available actions')
         else:
             self.last_date = self._load_date()
-            verbose('Loading actions since %s' % (self.last_date,))
+            self.logger.start_date('Loading actions since %s' % (self.last_date,))
         first = True
         while first or (not ARGS.once):
             if not first:
@@ -384,35 +395,45 @@ class Loader(object):
             self.last_date = action.date()
             self._save_date(self.last_date)
 
-#
-# Run loop
-#
-printer = ActionPrinter()
-loader = Loader()
-for json_text in loader.load_func():
-    verbose(json_text)
-    json_dict = json.loads(json_text)
-    boards = json_dict['boards']
-    actions = []
-    for b in boards:
-        actions = actions + b['actions']
-    actions.sort(lambda x,y: cmp(x['date'], y['date']))
-    for a in actions:
-        action = Action(a)
-        loader.saw_action(action)
-        msg = printer.get_message(action)
-        if msg is None:
-            continue
-        verbose(msg.replace('\n', '\t'))
-        post_params = {
-            'type' : 'stream',
-            'to' : CONFIG.zulip_stream(),
-            'subject' : action.derive_subject(),
-            'content' : msg
-        }
-        if not ARGS.no_post:
-            r = requests.post(ZULIP_URL, auth=CONFIG.zulip_auth(), data=post_params)
-            if r.status_code != 200:
-                stderr('Error %d POSTing to Zulip: %s' % (r.status_code, r.text))
-    sys.stdout.flush()
+
+class Runner(object):
+    def __init__(self, logger):
+        self.logger = logger
+
+    def run(self):
+        printer = ActionPrinter()
+        loader = Loader(self.logger)
+        for json_text in loader.load_func():
+            self.logger.trello_json(json_text)
+            json_dict = json.loads(json_text)
+            boards = json_dict['boards']
+            actions = []
+            for b in boards:
+                actions = actions + b['actions']
+            actions.sort(lambda x,y: cmp(x['date'], y['date']))
+            for a in actions:
+                action = Action(a)
+                loader.saw_action(action)
+                msg = printer.get_message(action)
+                if msg is None:
+                    continue
+                self.logger.zulip_msg(msg.replace('\n', '\t'))
+                post_params = {
+                    'type' : 'stream',
+                    'to' : CONFIG.zulip_stream(),
+                    'subject' : action.derive_subject(),
+                    'content' : msg
+                }
+                if not ARGS.no_post:
+                    r = requests.post(ZULIP_URL, auth=CONFIG.zulip_auth(), data=post_params)
+                    if r.status_code != 200:
+                        stderr('Error %d POSTing to Zulip: %s' % (r.status_code, r.text))
+            sys.stdout.flush()
+
+
+
+if __name__ == '__main__':
+    logger = Logger()
+    runner = Runner(logger)
+    runner.run()
 
