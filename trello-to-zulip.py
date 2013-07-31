@@ -355,7 +355,7 @@ class Loader(object):
             'board_fields' : 'name',
             'board_actions' : 'all',
             'board_actions_limit' : '1000',
-            'board_actions_since' : None # Replaced in run loop
+            'board_actions_since' : None # Replaced each iteration
         }
         if ARGS.all:
             self.last_date = '1970-01-01T00:00:00Z'
