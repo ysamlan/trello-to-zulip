@@ -406,10 +406,16 @@ class Runner(object):
         for json_text in loader.load_func():
             self.logger.trello_json(json_text)
             json_dict = json.loads(json_text)
-            boards = json_dict['boards']
             actions = []
-            for b in boards:
-                actions = actions + b['actions']
+            if 'boards' in json_dict:
+                boards = json_dict['boards']
+                for b in boards:
+                    actions += b['actions']
+            elif 'actions' in json_dict:
+                actions += json_dict['actions']
+            else:
+                stderr('Unknown input format')
+                sys.exit(1)
             actions.sort(lambda x,y: cmp(x['date'], y['date']))
             for a in actions:
                 action = Action(a)
