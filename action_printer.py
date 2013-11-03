@@ -10,12 +10,15 @@ class ActionPrinter(object):
         msg = handler(action)
         return msg
     def _unknown_action(self, a):
-        if a.has_board_name():
-            name = a.board_name()
-            url = a.board_url()
         if a.has_card_name():
             name = a.card_name()
             url = a.card_url()
+        elif a.has_board_name():
+            name = a.board_name()
+            url = a.board_url()
+        else:
+            name = '<unknown name>'
+            url = '<unknown url>'
         return '%s performed %s on [%s](%s)' % (
             a.creator_name(),
             a.type(),
@@ -76,7 +79,7 @@ class ActionPrinter(object):
         state = 'commented'
         if a.data().get('dateLastEdited', None) is not None:
             state = 'edited comment'
-        return '%s %s on card [%s](%s) \n>%s\n\n' % (
+        return '%s %s on card [%s](%s) \n>%s' % (
             a.creator_name(),
             state,
             a.card_name(),
