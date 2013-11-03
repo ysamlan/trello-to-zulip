@@ -6,19 +6,14 @@
       "shortLink": "b1slb1sl"
     },
     "card": {
+      "desc": "Card Name description has multiple words of text. And stuff.",
       "id": "cidcidcidcidcidcidcidcid",
       "idShort": 1,
       "name": "Card Name",
       "shortLink": "cslcslss"
     },
-    "checkItem": {
-      "id": "ciidciidciidciidciidciid",
-      "name": "Check Item Name",
-      "state": "complete"
-    },
-    "checklist": {
-      "id": "clidclidclidclidclidclid",
-      "name": "Checklist Name"
+    "old": {
+      "desc": "Old description text."
     }
   },
   "date": "2013-11-03T20:23:46.185Z",
@@ -31,5 +26,5 @@
     "initials": "MCFN",
     "username": "mcfname"
   },
-  "type": "updateCheckItemStateOnCard"
+  "type": "updateCard"
 }
