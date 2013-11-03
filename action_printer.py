@@ -19,7 +19,7 @@ class ActionPrinter(object):
         else:
             name = '<unknown name>'
             url = '<unknown url>'
-        return '%s performed %s on [%s](%s)' % (
+        return u'%s performed %s on [%s](%s)' % (
             a.creator_name(),
             a.type(),
             name,
@@ -32,7 +32,7 @@ class ActionPrinter(object):
     #
     def addAttachmentToCard(self, a):
         attachment = a.data()['attachment']
-        return '%s added [%s](%s) attachment to card [%s](%s)' % (
+        return u'%s added [%s](%s) attachment to card [%s](%s)' % (
             a.creator_name(),
             attachment['name'],
             attachment['url'],
@@ -40,7 +40,7 @@ class ActionPrinter(object):
             a.card_url()
         )
     def addChecklistToCard(self, a):
-        return '%s added checklist **%s** to card [%s](%s)' % (
+        return u'%s added checklist **%s** to card [%s](%s)' % (
             a.creator_name(),
             a.data()['checklist']['name'],
             a.card_name(),
@@ -50,26 +50,26 @@ class ActionPrinter(object):
         # Contains ['data']['idMemberAdded'] if we wanted to look it up
         return None
     def addMemberToCard(self, a):
-        return '%s added **%s** to card [%s](%s)' % (
+        return u'%s added **%s** to card [%s](%s)' % (
             a.creator_name(),
             a['member']['fullName'],
             a.card_name(),
             a.card_url()
         )
     def createBoard(self, a):
-        return '%s created board [%s](%s)' % (
+        return u'%s created board [%s](%s)' % (
             a.creator_name(),
             a.board_name(),
             a.board_url()
         )
     def createCard(self, a):
-        return '%s created card [%s](%s)' % (
+        return u'%s created card [%s](%s)' % (
             a.creator_name(),
             a.card_name(),
             a.card_url()
         )
     def createList(self, a):
-        return '%s created list **%s** on board [%s](%s)' % (
+        return u'%s created list **%s** on board [%s](%s)' % (
             a.creator_name(),
             a.data()['list']['name'],
             a.board_name(),
@@ -79,7 +79,7 @@ class ActionPrinter(object):
         state = 'commented'
         if a.data().get('dateLastEdited', None) is not None:
             state = 'edited comment'
-        return '%s %s on card [%s](%s) \n>%s' % (
+        return u'%s %s on card [%s](%s) \n>%s' % (
             a.creator_name(),
             state,
             a.card_name(),
@@ -91,7 +91,7 @@ class ActionPrinter(object):
         # event, which will report what we want.
         pass
     def moveCardFromBoard(self, a):
-        return '%s moved card [%s](%s) from **%s** to **%s**' % (
+        return u'%s moved card [%s](%s) from **%s** to **%s**' % (
             a.creator_name(),
             a.card_name(),
             a.card_url(),
@@ -99,7 +99,7 @@ class ActionPrinter(object):
             a.data()['boardTarget']['name']
         )
     def removeMemberFromCard(self, a):
-        return '%s removed **%s** from card [%s](%s)' % (
+        return u'%s removed **%s** from card [%s](%s)' % (
             a.creator_name(),
             a['member']['fullName'],
             a.card_name(),
@@ -110,7 +110,7 @@ class ActionPrinter(object):
         old = a.data()['old']
         name = old.get('name', None)
         if name is not None:
-            return '%s renamed from **%s** to **%s**' % (
+            return u'%s renamed from **%s** to **%s**' % (
                 a.creator_name(),
                 name,
                 a.board_name()
@@ -121,7 +121,7 @@ class ActionPrinter(object):
         old = a.data()['old']
         id_list = old.get('idList', None)
         if id_list is not None:
-            return '%s moved card [%s](%s) from **%s** to **%s**' % (
+            return u'%s moved card [%s](%s) from **%s** to **%s**' % (
                 a.creator_name(),
                 a.card_name(),
                 a.card_url(),
@@ -131,7 +131,7 @@ class ActionPrinter(object):
         closed = old.get('closed', None)
         if closed is not None:
             new_state = a.data()['card']['closed'] and 'archived' or 're-opened'
-            return '%s %s card [%s](%s)' % (
+            return u'%s %s card [%s](%s)' % (
                 a.creator_name(),
                 new_state,
                 a.card_name(),
@@ -139,7 +139,7 @@ class ActionPrinter(object):
             )
         name = old.get('name', None)
         if name is not None:
-            return '%s renamed card from **%s** to [%s](%s)' % (
+            return u'%s renamed card from **%s** to [%s](%s)' % (
                 a.creator_name(),
                 name,
                 a.card_name(),
@@ -148,7 +148,7 @@ class ActionPrinter(object):
         desc = old.get('desc', None)
         if desc is not None:
             # Note: new description is not included
-            return '%s updated description for card [%s](%s)' % (
+            return u'%s updated description for card [%s](%s)' % (
                 a.creator_name(),
                 a.card_name(),
                 a.card_url()
@@ -159,7 +159,7 @@ class ActionPrinter(object):
             state = 'added due date **%s** to' % (new_due,)
             if new_due is None:
                 state = 'removed due date from'
-            return '%s %s card [%s](%s)' % (
+            return u'%s %s card [%s](%s)' % (
                 a.creator_name(),
                 state,
                 a.card_name(),
@@ -174,7 +174,7 @@ class ActionPrinter(object):
         checked_state = 'checked'
         if a.data()['checkItem']['state'] == 'incomplete':
             checked_state = 'unchecked'
-        return '%s %s  **%s** on card [%s](%s)' % (
+        return u'%s %s  **%s** on card [%s](%s)' % (
             a.creator_name(),
             checked_state,
             a.data()['checkItem']['name'],

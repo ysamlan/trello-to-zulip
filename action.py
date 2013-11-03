@@ -22,17 +22,17 @@ class Action(object):
         return self.data()['card']['name']
     def board_url(self):
         board = self.data()['board']
-        return 'https://trello.com/board/%s' % (board['id'],)
+        return u'https://trello.com/board/%s' % (board['id'],)
     def card_url(self):
         card = self.data()['card']
-        return 'https://trello.com/c/%s' % (card['id'],)
+        return u'https://trello.com/c/%s' % (card['id'],)
     def creator_name(self):
         member = self.json.get('memberCreator', None)
         if member is None:
-            return '<unknown>'
+            return u'<unknown>'
         return member['fullName']
     def derive_subject(self):
-        subject = '<unknown>'
+        subject = u'<unknown>'
         if self.has_card_name():
             subject = self.card_name()
         elif self.has_board_name():
@@ -44,6 +44,6 @@ ZULIP_SUBJECT_MAX   = 60
 
 def shorten_subject(s):
     if len(s) > ZULIP_SUBJECT_MAX:
-        return s[:ZULIP_SUBJECT_MAX - 3] + '...'
+        return s[:ZULIP_SUBJECT_MAX - 3] + u'...'
     return s
 

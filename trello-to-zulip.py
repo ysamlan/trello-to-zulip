@@ -36,7 +36,8 @@ def stderr(s):
 class Logger(object):
     def _log(self, msg):
         if ARGS.verbose:
-            print str(msg)
+            # Defensive replace as this is a verbose/debug print only
+            print msg.encode('utf-8', 'backslashreplace')
 
     def trello_json(self, msg):
         self._log(msg)
@@ -112,6 +113,8 @@ class Loader(object):
     def _from_files(self):
         for f in ARGS.file:
             text = f.read()
+            if type(text) != unicode:
+                text = text.decode('utf-8')
             f.close()
             yield text
 
@@ -149,7 +152,10 @@ class Loader(object):
                 post_params['board_actions_since'] = self.last_date
             r = requests.get(CONFIG.trello_url(), params=post_params)
             if r.status_code == 200:
-                yield r.text.encode('utf-8')
+                text = r.text
+                if type(text) != unicode:
+                    text = r.text.decode('utf-8')
+                yield text
             else:
                 stderr('Error making Trello request: %d %s' % (r.status_code, r.text))
 

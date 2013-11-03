@@ -27,6 +27,8 @@ for action_file in glob.glob('*.json'):
         if os.path.exists(expected_file):
             with open(expected_file, 'r') as f:
                 expected = f.read()
+                if type(expected) != unicode:
+                    expected = expected.decode('utf-8')
         else:
             expected = ''
 
@@ -41,12 +43,12 @@ for action_file in glob.glob('*.json'):
             if not saw_diff:
                 print action_file
                 saw_diff = True
-            print '  ', d
+            print '  ', d.replace('\n', '\n   ')
 
         if saw_diff:
             failed += 1
             with open(base_name + '.actual', 'w') as f:
-                f.write(actual)
+                f.write(actual.encode('utf-8'))
             print ''
         else:
             passed += 1
