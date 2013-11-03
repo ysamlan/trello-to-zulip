@@ -3,11 +3,6 @@
     "board": {
       "id": "b1idb1idb1idb1idb1idb1id"
     },
-    "card": {
-      "id": "cidcidcidcidcidcidcidcid",
-      "idShort": 1,
-      "name": "Card Name"
-    },
     "checklist": {
       "id": "clidclidclidclidclidclid",
       "name": "Checklist Name"

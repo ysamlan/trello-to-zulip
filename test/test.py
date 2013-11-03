@@ -41,7 +41,7 @@ for action_file in glob.glob('*.json'):
         saw_diff = False
         for d in difflib.unified_diff([expected], [actual], fromfile='expected', tofile='actual', lineterm=''):
             if not saw_diff:
-                print action_file
+                print base_name
                 saw_diff = True
             print '  ', d.replace('\n', '\n   ')
 
