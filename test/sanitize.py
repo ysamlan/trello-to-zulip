@@ -28,15 +28,15 @@ REPLACEMENTS = {
             'id': 'b2idb2idb2idb2idb2idb2id',
             'name': 'Board Two'
         },
-        "boardTarget": {
-            "id": "btidbtidbtidbtidbtidbtid",
-            "name": "Board Target Name"
+        'boardTarget': {
+            'id': 'btidbtidbtidbtidbtidbtid',
+            'name': 'Board Target Name'
         },
         'card': {
             'desc': 'Card Name description has multiple words of text. And stuff.',
             'due': NOW_DATETIME,
             'id': 'cidcidcidcidcidcidcidcid',
-            "idList": "cidlcidlcidlcidlcidlcidl",
+            'idList': 'cidlcidlcidlcidlcidlcidl',
             'idShort': 1,
             'name': 'Card Name',
             'shortLink': 'cslcslss',
@@ -47,11 +47,11 @@ REPLACEMENTS = {
             'name': 'Card Source Name',
             'shortLink': 'csslcssl'
         },
-        "checkItem": {
-            "id": "ciidciidciidciidciidciid",
-            "name": "Check Item Name",
-            "state": "complete",
-            "textData": None
+        'checkItem': {
+            'id': 'ciidciidciidciidciidciid',
+            'name': 'Check Item Name',
+            'state': 'complete',
+            'textData': None
         },
         'checklist': {
             'id': 'clidclidclidclidclidclid',
@@ -62,13 +62,13 @@ REPLACEMENTS = {
             'id': 'lidlidlidlidlidlidlidlid',
             'name': 'List Name'
         },
-        "listAfter": {
-            "id": "laidlaidlaidlaidlaidlaid",
-            "name": "List After Name"
+        'listAfter': {
+            'id': 'laidlaidlaidlaidlaidlaid',
+            'name': 'List After Name'
         },
-        "listBefore": {
-            "id": "lbidlbidlbidlbidlbidlbid",
-            "name": "List Before Name"
+        'listBefore': {
+            'id': 'lbidlbidlbidlbidlbidlbid',
+            'name': 'List Before Name'
         },
         'member': {
             'id': 'mcidmcidmcidmcidmcidmcid',
@@ -76,6 +76,8 @@ REPLACEMENTS = {
         },
         'old': {
             'due': NOW_DATETIME,
+            'idAttachmentCover': 'idattcididattcididattcid',
+            'idList': 'oidloidloidloidloidloidl',
             'name': 'Old Name',
             'labelNames': {
                 'red': 'Old Name label name'
