@@ -1,0 +1,26 @@
+{
+  "data": {
+    "board": {
+      "id": "b1idb1idb1idb1idb1idb1id",
+      "name": "Board One"
+    },
+    "card": {
+      "id": "cidcidcidcidcidcidcidcid",
+      "idShort": 1,
+      "name": "Card Name",
+      "shortLink": "cslcslss"
+    },
+    "text": "Some data text that has a number of words in it."
+  },
+  "date": "2013-11-03T20:23:46.185Z",
+  "id": "actidactidactidactidacti",
+  "idMemberCreator": "mcidmcidmcidmcidmcidmcid",
+  "memberCreator": {
+    "avatarHash": "mcahmcahmcahmcahmcahmcahmcahmcah",
+    "fullName": "Member Creator Full Name",
+    "id": "mcidmcidmcidmcidmcidmcid",
+    "initials": "MCFN",
+    "username": "mcfname"
+  },
+  "type": "commentCard"
+}

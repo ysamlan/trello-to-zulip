@@ -1,0 +1,21 @@
+{
+  "data": {
+    "board": {
+      "id": "b1idb1idb1idb1idb1idb1id",
+      "name": "Board One"
+    },
+    "idMemberAdded": "5123703ef4ace0ef4600b386",
+    "memberType": "normal"
+  },
+  "date": "2013-11-03T20:23:46.185Z",
+  "id": "actidactidactidactidacti",
+  "idMemberCreator": "mcidmcidmcidmcidmcidmcid",
+  "memberCreator": {
+    "avatarHash": "mcahmcahmcahmcahmcahmcahmcahmcah",
+    "fullName": "Member Creator Full Name",
+    "id": "mcidmcidmcidmcidmcidmcid",
+    "initials": "MCFN",
+    "username": "mcfname"
+  },
+  "type": "addMemberToBoard"
+}

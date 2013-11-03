@@ -1,0 +1,28 @@
+{
+  "data": {
+    "board": {
+      "id": "b1idb1idb1idb1idb1idb1id",
+      "name": "Board One"
+    },
+    "card": {
+      "id": "cidcidcidcidcidcidcidcid",
+      "idAttachmentCover": "",
+      "idShort": 1,
+      "name": "Card Name"
+    },
+    "old": {
+      "idAttachmentCover": "523ca1b2cbd8b0a00600066c"
+    }
+  },
+  "date": "2013-11-03T20:23:46.185Z",
+  "id": "actidactidactidactidacti",
+  "idMemberCreator": "mcidmcidmcidmcidmcidmcid",
+  "memberCreator": {
+    "avatarHash": "mcahmcahmcahmcahmcahmcahmcahmcah",
+    "fullName": "Member Creator Full Name",
+    "id": "mcidmcidmcidmcidmcidmcid",
+    "initials": "MCFN",
+    "username": "mcfname"
+  },
+  "type": "updateCard"
+}
