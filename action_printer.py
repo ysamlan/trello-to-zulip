@@ -18,7 +18,7 @@ class ActionPrinter(object):
             url = a.board_url()
         else:
             name = '<unknown name>'
-            url = '<unknown url>'
+            url = ''
         return u'%s performed %s on [%s](%s)' % (
             a.creator_name(),
             a.type(),
@@ -32,10 +32,11 @@ class ActionPrinter(object):
     #
     def addAttachmentToCard(self, a):
         attachment = a.data()['attachment']
+        url = attachment.get('url', '')
         return u'%s added [%s](%s) attachment to card [%s](%s)' % (
             a.creator_name(),
             attachment['name'],
-            attachment['url'],
+            url,
             a.card_name(),
             a.card_url()
         )
