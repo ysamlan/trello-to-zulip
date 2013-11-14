@@ -1,2 +1,6 @@
+*.swp
+.DS_Store
 config.json
 .trello-to-zulip-date
+*.pyc
+

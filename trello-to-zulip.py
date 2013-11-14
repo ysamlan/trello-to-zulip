@@ -57,7 +57,7 @@ class Config(object):
         if ARGS.config:
             secondary = json.loads(ARGS.config.read())
             ARGS.config.close()
-        settings = ['TRELLO_KEY', 'TRELLO_TOKEN', 'TRELLO_ORG', 'ZULIP_EMAIL', 'ZULIP_KEY', 'ZULIP_STREAM']
+        settings = ['TRELLO_KEY', 'TRELLO_BOARD_IDS', 'TRELLO_TOKEN', 'TRELLO_ORG', 'ZULIP_EMAIL', 'ZULIP_KEY', 'ZULIP_STREAM']
         for s in settings:
             if s in primary:
                 self.params[s] = primary[s]
@@ -71,6 +71,8 @@ class Config(object):
     #
     def trello_key(self):
         return self.params['TRELLO_KEY']
+    def trello_board_ids(self):
+        return self.params['TRELLO_BOARD_IDS']
     def trello_token(self):
         return self.params['TRELLO_TOKEN']
     def trello_org(self):
@@ -187,7 +189,8 @@ class Runner(object):
             if 'boards' in json_dict:
                 boards = json_dict['boards']
                 for b in boards:
-                    actions += b['actions']
+                    if b['id'] in CONFIG.trello_board_ids():
+                        actions += b['actions']
             elif 'actions' in json_dict:
                 actions += json_dict['actions']
             else:

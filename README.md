@@ -18,6 +18,8 @@ with full details on creating them in the next section.
 - TRELLO_ORG
     - Trello organization name
     (use the Orgname from your URLs, e.g. "acmeco" and not "Acme Co.")
+- TRELLO_BOARD_IDS
+    - IDs of Trello boards to display (not shortlink code - find this under the board's "Export JSON" setting). Required right now; will be optional in the future.
 - ZULIP_EMAIL
     - Zulip bot email
 - ZULIP_KEY

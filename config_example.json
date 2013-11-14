@@ -2,6 +2,7 @@
     "TRELLO_KEY"    : "<KEY>",
     "TRELLO_TOKEN"  : "<TOKEN>",
     "TRELLO_ORG"    : "<ORGANIZATION>",
+	"TRELLO_BOARD_IDS" : ["<BOARD_ID_TO_SHOW>", "<ANOTHER_BOARD_ID_TO_SHOW>"],
 
     "ZULIP_EMAIL"   : "<BOT EMAIL>",
     "ZULIP_KEY"     : "<BOT API KEY>",
